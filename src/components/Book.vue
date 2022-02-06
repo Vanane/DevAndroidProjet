@@ -1,18 +1,17 @@
 <template>
 	<div class="card">
 	<div class="card-image">		
-		<figure v-if="bookCover != null && bookCover != ''" class="image is-4by3">
-			<img v-bind:src="bookCover" alt="Book cover">
+		<figure v-if="bookCover != null && bookCover != ''" class="image">
+			<img v-bind:src="bookCover" alt="Book cover" class="bookcover">
 		</figure>
 	</div>
 	<div class="card-content">
 		<div class="media">
 			<div class="media-content">
-				<p class="title is-4">{{bookTitle}}</p>
-				<p class="subtitle is-6"><a v-bind:href="'books?author='+bookAuthor">{{bookAuthor}}</a></p>
+				<p class="title is-4"><router-link :to="{ name: 'BookDetail', params: { id: bookId } }">{{bookTitle}}</router-link></p>
+				<p class="subtitle is-6">{{bookAuthor}}</p>
 			</div>
 		</div>
-		<div class="content">{{bookResume}}</div>
 	</div>
 </div>
 </template>
@@ -21,12 +20,10 @@
 	export default {
 		name: 'Book',
 		props: {
+			bookId : String,
 			bookTitle : String,
 			bookAuthor : String,
-			bookDate : Date,
-			bookEditor : String,
-			bookResume : String,
-			bookCover : String
+			bookPublisher : String,
 		},
 		computed: {},
 		mounted() {},
@@ -36,5 +33,8 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
-
+.bookcover {
+    width: auto;
+    height: 100%;
+}
 </style>

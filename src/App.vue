@@ -3,8 +3,9 @@
 		<div class="container">
 			<BarMenu :titles="
 			[
-				{title:'Liste', href:'list'},
-				{title:'A propos', href:'about'},
+				{title:'Books', href:'/books'},
+				{title:'Movies', href:'/movies'},
+				{title:'My List', href:'/mylist'},
 			]"/>
 			<router-view/>
 		</div>

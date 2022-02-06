@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import ExampleComposterList from './components/routes/ExampleComposterList.vue'	
 import BookList from './components/routes/BookList.vue'	
+import BookDetail from './components/routes/BookDetail.vue'	
  
 
 const routes = [
@@ -13,6 +14,11 @@ const routes = [
 		path: '/books',
 		name:'BookList',
 		component: BookList
+	},
+	{
+		path: '/book/:id',
+		name: 'BookDetail',
+		component: BookDetail
 	}
 ]
 
