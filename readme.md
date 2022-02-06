@@ -12,8 +12,22 @@ Langages web et Java
 
 ### Librairies
 
-VueJS pour le développement web
+[VueJS](https://vuejs.org/) pour le développement web
 
-Capacitor pour la conversion en application Android
+[Capacitor](https://capacitorjs.com/solution/vue) pour la conversion en application Android
+
+[Bulma](https://bulma.io/) pour le style :sunglasses:
 
 ### APIs
+
+## Installation
+
+Vous allez avoir besoin de NodeJS et de NPM pour commencer :
+`apt install nodejs npm`
+Puis d'installer l'application depuis npm : 
+`npm install`
+Pour build l'application : 
+`npm run build`
+Pour exécuter l'application (*serve* fait un *build* au préalable, si ce n'est pas déjà buildé): 
+`npm run serve`
+

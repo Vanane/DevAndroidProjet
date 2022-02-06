@@ -5,7 +5,7 @@
 		<br>
 		<br>
 		<div id="composteurs" class="columns is-multiline">
-			<Composteur id="" class="column is-full-mobile is-half-tablet is-one-third-desktop is-one-quarter-widescreen is-one-quarter-fullhd"
+			<ExampleComposter id="" class="column is-full-mobile is-half-tablet is-one-third-desktop is-one-quarter-widescreen is-one-quarter-fullhd"
 				v-for="c in composteurs"
 				v-bind:key="c.id"
 				:idc="c.id"
@@ -15,12 +15,12 @@
 </template>
 
 <script>
-import Composteur from "../Composteur.vue";
+import ExampleComposter from "../ExampleComposter.vue";
 export default {
     name:"ComposterList",
     components:
     {
-        Composteur
+        ExampleComposter
     },
     data()
     {

@@ -28,7 +28,7 @@
 
 <script>
 export default {
-		name:"Composter",
+		name:"ExampleComposter",
 		props:
 		{
 			idc: Number
