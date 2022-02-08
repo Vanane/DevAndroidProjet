@@ -1,10 +1,5 @@
 <template>
 	<div class="card">
-	<div class="card-image">		
-		<figure v-if="bookCover != null && bookCover != ''" class="image">
-			<img v-bind:src="bookCover" alt="Book cover" class="bookcover">
-		</figure>
-	</div>
 	<div class="card-content">
 		<div class="media">
 			<div class="media-content">
@@ -22,7 +17,7 @@
 		props: {
 			bookId : String,
 			bookTitle : String,
-			bookAuthor : String,
+			bookAuthor : Array,
 			bookPublisher : String,
 		},
 		computed: {},

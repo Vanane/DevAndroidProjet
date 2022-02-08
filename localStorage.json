@@ -1,0 +1,30 @@
+/* Exemple de format des données stockées dans le localStorage
+Les données sont en format JSON. Il faut les parder pour les lire
+Lecture dans localStorage : var a = localSotrage.getItem("nomDeLItem")
+Ecriture dans localStorage : localSotrage.setItem("nomDeLItem", valeurEnString)*/
+
+{
+    "bookWatchlist":
+    [
+        {
+            "bookId":"IdLivreGoogle1",
+            "watched":"true"
+        },
+        {
+            "bookId":"IdLivreGoogle2",
+            "watched":"false"
+        }
+    ],
+
+    "movieWatchlist":
+    [
+        {
+            "movieId":"IdMovieDeLAPI1",
+            "watched":"true"
+        },
+        {
+            "movieId":"IdMovieDeLAPI2",
+            "watched":"false"
+        }
+    ]
+}

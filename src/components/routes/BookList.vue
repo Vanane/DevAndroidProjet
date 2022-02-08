@@ -36,14 +36,7 @@ export default {
         onPrompt()
         {
             clearTimeout(this.searchTimer);
-            this.searchTimer = setTimeout(() => { this.getBooks(this.getSearchPrompt()) }, 1000/3);
-        },
-
-        getBooks(author)
-        {
-                fetch("https://www.googleapis.com/books/v1/volumes?q=search+inauthor:" + author)
-                    .then(e => e.json() )
-                    .then(l => { this.bookList = l.items; })
+            this.searchTimer = setTimeout(() => { this.searchBooks(this.getSearchPrompt()).then(e => this.bookList = e); }, 666);
         },
 
         getSearchPrompt()
@@ -54,7 +47,7 @@ export default {
         refreshResearch(author)
         {
             this.$refs.searchBar.value = author;
-            this.getBooks(this.getSearchPrompt());
+            this.searchBooks(this.getSearchPrompt());
         }
     },
     mounted()

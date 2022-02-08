@@ -1,6 +1,7 @@
 <template>
 	<div v-if="this.bookDetail">
 		<BookDetail
+			:bookId="this.bookDetail.id"
 			:bookTitle="this.bookDetail.volumeInfo.title"
 			:bookAuthor="this.bookDetail.volumeInfo.authors"
 			:bookPublisher="this.bookDetail.volumeInfo.publisher"
