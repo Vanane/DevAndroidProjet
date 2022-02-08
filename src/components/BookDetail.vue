@@ -38,7 +38,8 @@ export default {
 		bookCover : String
 	},
 	mounted() {
-		this.isInWatchlist = (this.getBookFromWatchlist(this.bookId) != null);
+		this.getBookFromWatchlist(this.bookId)
+		.then(e => this.isInWatchlist = e != null);
 	},
 
 	methods:

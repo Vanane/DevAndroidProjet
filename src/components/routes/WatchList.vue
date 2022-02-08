@@ -31,9 +31,12 @@ export default {
     },
 
     beforeMount() {
-        this.bookWatchlist = this.getBookWatchlist();
-        this.bookWatchlist.map(e => {
-            this.getBook(e.bookId).then(b => this.bookDetails.push(b));
+        this.getBookWatchlist()
+        .then( e => {
+            this.bookWatchlist = e;
+            this.bookWatchlist.map(e => {
+                this.getBook(e.bookId).then(b => this.bookDetails.push(b));
+            });
         });
     },
 

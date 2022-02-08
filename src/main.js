@@ -1,6 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router  from './router'
+import { Storage } from '@capacitor/storage';
 
 const app = createApp(App);
 
@@ -9,52 +10,51 @@ app.mixin({
     name: "localStorageManager",
     methods:
     {
-        init()
+        async init()
         {
-            var books = localStorage.getItem("bookWatchlist");
-            var movies = localStorage.getItem("movieWatchlist");
-
-            if(!books) localStorage.setItem("bookWatchlist",  JSON.stringify([]));
-            if(!movies) localStorage.setItem("movieWatchlist", JSON.stringify([]));
+            var books = (await Storage.get({ key: 'bookWatchlist' })).value;
+            var movies = (await Storage.get({ key: 'bookWatchlist' })).value;
+            
+            if(!books) await Storage.set({ key: 'bookWatchlist', value: JSON.stringify([]) });
+            if(!movies) await Storage.set({ key: 'movieWatchlist', value: JSON.stringify([]) });
         },
 
         /***********/
         /*  Books  */
         /***********/
 
-        getBookWatchlist()
+        async getBookWatchlist()
         {
-            return JSON.parse(localStorage.getItem("bookWatchlist"));
+            return JSON.parse((await Storage.get({ key: 'bookWatchlist' })).value);
         },
 
-        getBookFromWatchlist(id)
+        async getBookFromWatchlist(id)
         {
-            var books = JSON.parse(localStorage.getItem("bookWatchlist"));
+            var books = JSON.parse((await Storage.get({ key: 'bookWatchlist' })).value);
             if(books)
                 return books.find(e => e.bookId == id);
             return null;
         },
 
-		addBookToWatchlist(id)
+		async addBookToWatchlist(id)
 		{
-            console.log("adding" + id);
 			this.init();
-			if(!this.getBookFromWatchlist(id))
+			if(! (await this.getBookFromWatchlist(id)))
             {
-                var watchlist = JSON.parse(localStorage.getItem("bookWatchlist"));
+                var watchlist = JSON.parse((await Storage.get({ key: 'bookWatchlist' })).value);
                 watchlist.push({ bookId: id, watched:false });
-                localStorage.setItem("bookWatchlist", JSON.stringify(watchlist));
+                await Storage.set({ key: 'bookWatchlist', value: JSON.stringify(watchlist) });
             }
 		},
 
-		removeBookFromWatchlist(id)
+		async removeBookFromWatchlist(id)
 		{
             this.init();
-			if(this.getBookFromWatchlist(id))
+			if((await this.getBookFromWatchlist(id)))
             {
-                var watchlist = JSON.parse(localStorage.getItem("bookWatchlist"));
+                var watchlist = JSON.parse((await Storage.get({ key: 'bookWatchlist' })).value);
                 watchlist.splice(watchlist.findIndex(e => e.bookId == id), 1);
-                localStorage.setItem("bookWatchlist", JSON.stringify(watchlist));
+                await Storage.set({ key: 'bookWatchlist', value: JSON.stringify(watchlist) });
             }
 		},
 
@@ -62,9 +62,9 @@ app.mixin({
         /*  Movies  */
         /************/
 
-        getMovieFromWatchlist(id)
+        async getMovieFromWatchlist(id)
         {
-            var movies = JSON.parse(localStorage.getItem("movieWatchlist"));
+            var movies = JSON.parse((await Storage.get({ key: 'movieWatchlist' })).value);
             if(movies)
                 return movies.find(e => e.movieId == id);
             return null;

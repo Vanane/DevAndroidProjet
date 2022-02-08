@@ -1,10 +1,16 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import Index from './components/routes/Index.vue'	
 import BookList from './components/routes/BookList.vue'	
 import BookDetail from './components/routes/BookDetail.vue'	
 import WatchList from './components/routes/WatchList.vue'
  
 
 const routes = [
+	{
+		path: '/',
+		name: 'Index',
+		component: Index
+	},
 	{
 		path: '/mylist',
 		name: 'List',
