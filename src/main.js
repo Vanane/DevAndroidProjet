@@ -82,6 +82,9 @@ app.mixin({
         }
     },
     methods: {
+        /**
+            Retourne le livre correspondant à l'id depuis l'API Google
+         */
         async getBook(id)
         {
             if(!id) return;
@@ -98,6 +101,9 @@ app.mixin({
             );
         },
 
+        /**
+            Retourne le livre correspondant à l'id depuis le cache local
+         */
         getBookInRepository(id)
         {
             if(!id) return;
@@ -108,34 +114,58 @@ app.mixin({
             return null;
         },
 
-        async searchBooks(author, title)
+        /**
+            Retourne une liste de livres par filtres depuis l'api Google
+         */
+        async searchBooks(author, title, categories)
         {
-            var books = this.searchBooksInRepository(author, title);
+            /*
+            var books = this.searchBooksInRepository(author, title, categories);
+
             if(books.length > 0) return books;
-             
+            */
+            
+            var books = new Array();
+
             var url = "https://www.googleapis.com/books/v1/volumes?q=search";
             if(author)
                 url = url + "+inauthor:" + author;
             if(title)
                 url  = url + "+intitle:" + title;
-
+                if(categories)
+                url = url + "+subject:" + categories;
             return await fetch(url)
                 .then(e => e = e.json())
                 .then(e => {
                     e.items.map(el => {
-                        this.bookRepository.set(el.id, el);
+                        this.addToBookRepository(el);
                         books.push(el);
                     });
                     return e.items;
                 }
-            );
+            ).catch(() => { return [] });
         },
 
-        searchBooksInRepository(author, title)
+        /**
+            Ajoute un livre au cache local   
+         */
+        addToBookRepository(book)
+        {
+            this.bookRepository.set(book.id, book.volumeInfo);
+        },
+
+        /**
+            Retourne une liste de livres filtrés depuis le cache local
+         */
+        searchBooksInRepository(author, title, categories)
         {
             var books = [];
             this.bookRepository.forEach(e => {
-                if(e.author == author && e.title == title)
+                var found = false;
+                if(author) found = e.authors?.includes(author);
+                if(title) found = e.title?.includes(title);
+                if(categories) found = e.categories?.toString().includes(categories);
+                if(found)
                     books.push(e);
             })
             return books;

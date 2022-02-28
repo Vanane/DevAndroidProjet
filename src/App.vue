@@ -6,6 +6,7 @@
 				{title:'Books', href:'/books'},
 				{title:'Movies', href:'/movies'},
 				{title:'My List', href:'/mylist'},
+				{title:'Scan your book', href:'/scan'},
 			]"/>
 			<router-view/>
 		</div>

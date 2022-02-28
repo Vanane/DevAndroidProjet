@@ -1,13 +1,15 @@
 <template>
-	<div class="card">
-	<div class="card-content">
-		<div class="media">
-			<div class="media-content">
-				<p class="title is-4"><router-link :to="{ name: 'BookDetail', params: { id: bookId } }">{{bookTitle}}</router-link></p>
-				<p class="subtitle is-6">{{bookAuthor}}</p>
-			</div>
-		</div>
-	</div>
+<div class="card">
+    <router-link :to="{ name: 'BookDetail', params: { id: bookId } }">
+        <div class="card-content">
+            <div class="media">
+                <div class="media-content">
+                    <p class="title is-4">{{bookTitle}}</p>
+                    <p class="subtitle is-6">{{bookAuthor}}</p>
+                </div>
+            </div>
+        </div>
+    </router-link>
 </div>
 </template>
 

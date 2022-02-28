@@ -1,9 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Index from './components/routes/Index.vue'	
-import BookList from './components/routes/BookList.vue'	
-import BookDetail from './components/routes/BookDetail.vue'	
-import WatchList from './components/routes/WatchList.vue'
- 
+import Index from './components/routes/IndexPage.vue'	
+import BookList from './components/routes/BookListPage.vue'	
+import BookDetail from './components/routes/BookDetailPage.vue'	
+import WatchList from './components/routes/WatchListPage.vue'
+ import ScanBook from './components/routes/ScanBookPage.vue'
 
 const routes = [
 	{
@@ -25,7 +25,12 @@ const routes = [
 		path: '/book/:id',
 		name: 'BookDetail',
 		component: BookDetail
-	}
+	},
+    {
+        path: '/scan',
+        name: 'ScanBook',
+        component: ScanBook
+    }
 ]
 
 const router = createRouter({

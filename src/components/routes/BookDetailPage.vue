@@ -8,6 +8,7 @@
 			:bookDate="this.bookDetail.volumeInfo.publishedDate"
 			:bookResume="this.bookDetail.volumeInfo.description"
 			:bookCover="this.bookDetail.volumeInfo.imageLinks ? this.bookDetail.volumeInfo.imageLinks.thumbnail : null"
+            :bookCategories="this.bookDetail.volumeInfo.categories ?? null"
 		/>
 	</div>
 	<div v-else-if="this.loaded || !this.$route.params.id">
@@ -33,8 +34,8 @@ export default {
 	methods:
     {
         getBookDetail() {
-            fetch("https://www.googleapis.com/books/v1/volumes/" + this.$route.params.id)
-                .then(e => e.json() )
+            
+            this.getBook(this.$route.params.id)
                 .then(l => { this.bookDetail = l; this.loaded = true; })
         }
     },
