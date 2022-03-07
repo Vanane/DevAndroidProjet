@@ -1,6 +1,7 @@
 <template>
     <div>
         <!--TODO : ajouter la recherche par titre, par éditeur, peut-être par genre avec une autre API, en croisant l'ISBN ?-->
+        
         <p class="title is-2">Search for books</p>
         <div class="field has-text-justified">
             <label class="label">Title</label>
