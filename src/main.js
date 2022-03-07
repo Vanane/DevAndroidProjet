@@ -101,6 +101,22 @@ app.mixin({
             );
         },
 
+        async getBookFromISBN(isbn) {
+            if(!isbn) return null;
+
+            var url = "https://www.googleapis.com/books/v1/volumes?q=search";
+            url = url + "+isbn:" + isbn;
+            return await fetch(url)
+                .then(e => e = e.json())
+                .then(e => {
+                    if(e.totalItems == 0) return null;
+                    if(e.items) e = e.items[0]; // S'il y a plusieurs résultats pour un ISBN, on prend le premier livre
+                    this.bookRepository.set(e.id, e);
+                    return e;
+                }
+            );
+        },
+
         /**
             Retourne le livre correspondant à l'id depuis le cache local
          */
@@ -125,8 +141,6 @@ app.mixin({
             if(books.length > 0) return books;
             */
             
-            var books = new Array();
-
             var url = "https://www.googleapis.com/books/v1/volumes?q=search";
             if(author)
                 url = url + "+inauthor:" + author;
@@ -139,7 +153,6 @@ app.mixin({
                 .then(e => {
                     e.items.map(el => {
                         this.addToBookRepository(el);
-                        books.push(el);
                     });
                     return e.items;
                 }

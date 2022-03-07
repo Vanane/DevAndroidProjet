@@ -24,26 +24,46 @@ export default {
         {
             clearTimeout(this.searchTimer);
             this.searchTimer = setTimeout(() => {
-                    this.searchBooks(this.getAuthorPrompt(), this.getTitlePrompt(), this.getCategoriesPrompt())
-                    .then(e => this.bookList = e);
+                this.redirectToBook(this.getISBNPrompt());
                 }, 666);
+        },
+
+        getISBNPrompt() {
+            return this.$refs.searchTitle.value;
         },
 
         async startScan()
         {
             try {
                 var isbn = await this.getISBN();
-                
-                await this.getBookISBN(isbn);
-
-                router.push({
-                    name:'BookDetail',
-                    params: {id: idFromISBN}
-                });
+                this.redirectToBook(isbn);                            
             }
             catch (error) {
                 alert(error);
             }
+        },
+
+        async redirectToBook(isbn)
+        {
+            var book = await this.getBookFromISBN(isbn);
+                if(!book || book.error) 
+                {
+                    console.log("not found, redirecting");
+                    this.$router.push({
+                        name: 'NotFound',
+                        params: {
+                            message: `Book not found.`
+                        }
+                    });
+                }
+                else
+                {
+                    console.log(`found ${book.title}, redirecting to details.`);
+                    this.$router.push({
+                        name:'BookDetail',
+                    params: {id: book.id}
+                    });
+                }
         },
 
         async getISBN()

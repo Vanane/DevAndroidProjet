@@ -3,7 +3,8 @@ import Index from './components/routes/IndexPage.vue'
 import BookList from './components/routes/BookListPage.vue'	
 import BookDetail from './components/routes/BookDetailPage.vue'	
 import WatchList from './components/routes/WatchListPage.vue'
- import ScanBook from './components/routes/ScanBookPage.vue'
+import ScanBook from './components/routes/ScanBookPage.vue'
+import NotFound from './components/NotFound.vue'
 
 const routes = [
 	{
@@ -30,6 +31,12 @@ const routes = [
         path: '/scan',
         name: 'ScanBook',
         component: ScanBook
+    },
+    {
+        path: '/404',
+        name: 'NotFound',
+        component: NotFound,
+        props: true
     }
 ]
 
