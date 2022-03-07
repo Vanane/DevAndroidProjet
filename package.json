@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@capacitor-community/barcode-scanner": "^2.0.1",
+    "@capacitor-community/text-to-speech": "^1.1.2",
     "@capacitor/android": "^3.4.0",
     "@capacitor/cli": "^3.4.0",
     "@capacitor/core": "^3.4.0",

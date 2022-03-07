@@ -19,6 +19,7 @@
 <script>
 import BookDetail from '../BookDetail.vue';
 import NotFound from '../NotFound.vue';
+
 export default {
 	name:"BookDetailRoute",
 	components: {
@@ -33,11 +34,10 @@ export default {
 
 	methods:
     {
-        getBookDetail() {
-            
+        getBookDetail() {            
             this.getBook(this.$route.params.id)
                 .then(l => { this.bookDetail = l; this.loaded = true; })
-        }
+        },
     },
 	mounted() {
 		if(this.$route.params.id)

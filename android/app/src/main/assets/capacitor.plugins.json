@@ -4,6 +4,10 @@
 		"classpath": "com.dutchconcepts.capacitor.barcodescanner.BarcodeScanner"
 	},
 	{
+		"pkg": "@capacitor-community/text-to-speech",
+		"classpath": "com.getcapacitor.community.tts.TextToSpeechPlugin"
+	},
+	{
 		"pkg": "@capacitor/storage",
 		"classpath": "com.capacitorjs.plugins.storage.StoragePlugin"
 	}

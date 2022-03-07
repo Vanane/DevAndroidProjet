@@ -183,18 +183,8 @@ app.mixin({
             })
             return books;
         }
-
     }
 });
-
-/* Gérer les films */
-app.mixin({
-    name:"movieRepository",    
-    methods:{}
-});
-
-
-
 
 
 app.use(router).mount('#app')

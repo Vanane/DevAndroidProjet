@@ -8,7 +8,10 @@
 			<p class="title is-3">By {{this.getAuthorString()}}</p>
 			<p class="title is-4">Published on {{bookDate ?? "unknown"}} by {{bookPublisher ?? "unknown"}}.</p>
 			<p class="title is-5">Categories : {{this.getBookCategoriesString()}}</p>
-        <p class="title is-4 has-text-justified">Description : </p>
+        <p class="title is-4 has-text-justified">Description :
+            <span v-if="!this.isTTSActive"> <a @click="this.doTTS()" href="#">🔊</a> </span>
+            <span v-else> <a @click="this.stopTTS()" href="#">🔈</a> </span>
+        </p>
 		<p ref="bookResume" class="has-text-justified">{{bookResume}}</p>
 		<span v-if="bookAuthor">
 				<router-link :to="{ name: 'BookList', query: { author: bookAuthor } }">More of the same author</router-link> | 
@@ -20,12 +23,14 @@
 </template>
 
 <script>
+import { TextToSpeech } from '@capacitor-community/text-to-speech';
 export default {
 	name: "BookDetail",
 	data()
 	{
 		return {
-			isInWatchlist: false
+			isInWatchlist: false,
+            isTTSActive: false
 		}
 	},
 	
@@ -79,6 +84,27 @@ export default {
         getBookCategoriesString()
         {
             return this.bookCategories ? this.bookCategories.join(', ') : "None";
+        },
+
+        
+        /** Démarre une session de Text-to-speech pour lire le détail d'un livre. */
+        async doTTS()
+        {
+            this.isTTSActive = true;            
+            await TextToSpeech.speak({
+                text: this.$refs.bookResume.innerText,
+                lang: 'en_US',
+                rate: 1.0,
+                pitch: 10,
+                volume: 1.0,
+                category: 'ambient'})
+                .then(() => this.stopTTS());
+        },
+        
+        async stopTTS()
+        {
+            TextToSpeech.stop()
+                .then(() => this.isTTSActive = false);
         }
 	}
 }
